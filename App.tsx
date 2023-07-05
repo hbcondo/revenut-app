@@ -1,3 +1,4 @@
+import { REVENUT_API_BASE, STRIPE_CLIENT_ID } from '@env';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
