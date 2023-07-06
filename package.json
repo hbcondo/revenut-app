@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "date-fns": "^2.30.0",
     "expo": "~48.0.18",
     "expo-auth-session": "~4.0.3",
     "expo-crypto": "~12.2.1",
