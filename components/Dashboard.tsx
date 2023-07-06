@@ -3,7 +3,7 @@ import { RevenutData, RevenutDates } from '../types/revenut';
 
 import { View, Text } from 'native-base';
 
-export function Dashboard() {
+export function RevenutDashboard() {
     return (
         <View>
             <Text>Revenut Dashboard</Text>
