@@ -7,8 +7,10 @@ const REVENUT_COLOR_OPPOSITE = '#1871C5';
 
 export function RevenutToday({rData, rDates} : {rData: RevenutData, rDates: RevenutDates}) {
 	return (
-		<Container>
-			<Box mt={2} ml={3}><Text bold color={'white'}>Today <Text bold color={REVENUT_COLOR_OPPOSITE}> {displayMonthDate(rDates.DateToday)}</Text></Text></Box>
+		<Box>
+			<Container mt={2} ml={3}>
+				<Text bold color={'white'}>Today <Text bold color={REVENUT_COLOR_OPPOSITE}> {displayMonthDate(rDates.DateToday)}</Text></Text>
+			</Container>
 			<HStack ml={1} space="3" p="2">
 				<Box w="33%" borderRightWidth={1} borderRightColor={'muted.50'}>
 					<Heading size="lg" color={'white'}>${displayCompactNumber(rData.VolumeGrossToday)}</Heading>
@@ -23,6 +25,6 @@ export function RevenutToday({rData, rDates} : {rData: RevenutData, rDates: Reve
 					<Text color={REVENUT_COLOR_OPPOSITE} bold>Customers</Text>
 				</Box>
 			</HStack>
-		</Container>
+		</Box>
 	)
 }
