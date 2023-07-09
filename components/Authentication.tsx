@@ -10,11 +10,6 @@ import { Avatar, HStack, Heading, Box } from 'native-base';
 import * as Linking from 'expo-linking';
 import { useAuthRequest, AuthSessionResult } from 'expo-auth-session';
 
-/**
- * Storage Key for identifying stripe account
- */
-const REVENUT_ACCOUNTID_STRIPE = 'REVENUT_USER_IDENTIFIER_STRIPE';
-
 export function RevenutAuthentication({
     toggleUserID
 	, toggleData
@@ -80,7 +75,7 @@ export function RevenutAuthentication({
 				toggleUserID(data.AccountID);
 				toggleLoading(false);
 
-				storage.saveToStorage(REVENUT_ACCOUNTID_STRIPE, data.AccountID);
+				storage.saveToStorage(storage.REVENUT_ACCOUNTID_STRIPE, data.AccountID);
 			})
 			.catch(ex => {
 				console.error(ex);
@@ -90,23 +85,24 @@ export function RevenutAuthentication({
 	return (
 		<HStack>
 			<Box w={"50%"}>
-				{!userId ?
-					<TouchableHighlight disabled={!request} onPress={() => {
-						// https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionoptions
-						// https://github.com/expo/expo/issues/5975
-						promptAsync({showInRecents: true}).then(promptCompleted);
-					}}>
-						<Image
-							source={require('../assets/stripe-connect.png')}
-							style={{ width: 150, height: 32 }}
-						/>
-					</TouchableHighlight>
-					:
-					<HStack space={2} alignItems={'center'}>
-						<Avatar source={{ uri: rData.AccountIconURL }} style={{ width: 40, height: 40 }}></Avatar>
-						<Heading style={{ width: 150, height: 32 }} color={'white'}>{rData.AccountName}</Heading>
-					</HStack>
-				}
+			{
+			!rData.AccountID ?
+				<TouchableHighlight onPress={() => {
+					// https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionoptions
+					// https://github.com/expo/expo/issues/5975
+					promptAsync({showInRecents: true}).then(promptCompleted);
+				}}>
+					<Image
+						source={require('../assets/stripe-connect.png')}
+						style={{ width: 150, height: 32 }}
+					/>
+				</TouchableHighlight>
+				:
+				<HStack space={2} alignItems={'center'}>
+					<Avatar source={{ uri: rData.AccountIconURL }} style={{ width: 40, height: 40 }}></Avatar>
+					<Heading style={{ width: 150, height: 32 }} color={'white'}>{rData.AccountName}</Heading>
+				</HStack>
+			}
 			</Box>
 			<Box w={"50%"} alignItems={'end'}>
 				<TouchableHighlight onPress={() => toggleSettings(true)}>

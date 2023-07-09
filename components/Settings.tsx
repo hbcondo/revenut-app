@@ -1,13 +1,41 @@
+import { RevenutData } from '../types/revenut';
+import * as api from '../utils/api';
+import * as storage from '../utils/storage';
+
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import { Modal, Center, Box, Badge, HStack, Spacer, Button, Flex, Link, Text } from 'native-base';
 
 export function RevenutSettings({
-    toggleSettings
+    toggleUserID
+    , toggleData
+    , toggleSettings
     , showSettings
     , userId }: {
-        toggleSettings: React.Dispatch<React.SetStateAction<boolean>>
+        toggleUserID: Dispatch<SetStateAction<null>>
+        , toggleData: Dispatch<SetStateAction<RevenutData>>
+        , toggleSettings: Dispatch<SetStateAction<boolean>>
         , showSettings: boolean
         , userId: string | null
     }) {
+    const handleLogout = (): void => {
+        if (userId) {
+            api.getLogoutData(userId)
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        console.error(response);
+                    }
+                })
+                .then(data => {
+                    toggleData(new RevenutData());
+                    toggleUserID(null);
+                    toggleSettings(false);
+                    storage.removeFromStorage(storage.REVENUT_ACCOUNTID_STRIPE);
+                })
+        }
+    }
+
     return (
         <Modal isOpen={showSettings} onClose={() => toggleSettings(false)} size={'full'}>
             <Modal.Content>
@@ -45,8 +73,3 @@ export function RevenutSettings({
         </Modal>
     )
 };
-
-const handleLogout = () => {
-    console.log("handleLogout");
-    // TODO: implement logout
-}

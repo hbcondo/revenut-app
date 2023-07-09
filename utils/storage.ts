@@ -1,6 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 /**
+ * Storage Key for identifying stripe account
+ */
+export const REVENUT_ACCOUNTID_STRIPE: string = 'REVENUT_USER_IDENTIFIER_STRIPE';
+
+/**
  * Returns a value from storage for the requested key
  * 
  * @param key storage key

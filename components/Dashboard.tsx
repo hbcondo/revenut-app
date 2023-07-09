@@ -36,7 +36,7 @@ export function RevenutDashboard() {
 				</Box>
 			</Stack>
 			<RevenutLoading isLoading={showLoading} />
-			<RevenutSettings toggleSettings={setSettings} showSettings={showSettings} userId={rUserID} />
+			<RevenutSettings toggleUserID={setUserID} toggleData={setData} toggleSettings={setSettings} showSettings={showSettings} userId={rUserID} />
 		</Center>
 	)
 }
