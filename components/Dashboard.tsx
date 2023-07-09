@@ -27,7 +27,7 @@ export function RevenutDashboard() {
 			>
 				<Box flex={{ base: 1, md: 3 }}>
 					<VStack p={2} bg="#E78E3A">
-						<RevenutAuthentication toggleSettings={setSettings} userId={rUserID} rData={rData} />
+						<RevenutAuthentication toggleUserID={setUserID} toggleData={setData} toggleLoading={setLoading} toggleSettings={setSettings} userId={rUserID} rData={rData} />
 						<RevenutToday rData={rData} rDates={rDates} />
 					</VStack>
 					<VStack alignItems={'center'} mt={1}>
