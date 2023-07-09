@@ -1,8 +1,13 @@
-import { getHealthCheck } from './api';
+import * as api from './api';
 import { test, expect } from '@jest/globals';
 
 test('api accessible and running', () => {
-	return getHealthCheck().then(response => {
-		expect(response).toEqual({ 'Hello': 'World!' });
-	});
+	return api.getHealthCheck()
+		.then((response) => {
+			expect(response.status).toBeTruthy();
+			return response.json();
+		})
+		.then((json) => {
+			expect(json).toEqual({ 'Hello': 'World!' });
+		});
 });
