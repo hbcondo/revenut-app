@@ -3,7 +3,7 @@ import { RevenutData } from '../types/revenut';
 import * as api from '../utils/api';
 import * as storage from '../utils/storage';
 
-import { Dispatch, SetStateAction, useCallback } from 'react';
+import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
 import { Image, TouchableHighlight } from 'react-native';
 import { Avatar, HStack, Heading, Box } from 'native-base';
 
@@ -32,6 +32,16 @@ export function RevenutAuthentication({
 		appURL = window.location.href;
 	}
 
+	// https://negativeepsilon.com/en/posts/expo-deep-linking/
+	useEffect(() => {
+		storage.getStorageValue(storage.REVENUT_ACCOUNTID_STRIPE)
+			.then(data => {
+				if (data) {
+					handleLogin(undefined, data);
+				}
+			})
+	}, [appURL]);	
+
 	const [request, response, promptAsync] = useAuthRequest(
 		// https://docs.expo.dev/versions/latest/sdk/auth-session/#useauthrequestconfig-discovery
 		{
@@ -39,7 +49,7 @@ export function RevenutAuthentication({
 			responseType: 'code',
 			scopes: ['read_write'],
 			redirectUri: appURL
-			//, state: ''
+			//, state: ''	TODO: pass state - https://stripe.com/docs/connect/oauth-reference
 		},
 		// https://docs.expo.dev/versions/latest/sdk/auth-session/#authrequestconfig
 		{
@@ -51,7 +61,7 @@ export function RevenutAuthentication({
 	const promptCompleted = useCallback(
 		(codeResponse: AuthSessionResult) => {
 			if (request && codeResponse?.type === 'success') {
-				handleLogin(codeResponse.params.code);
+				handleLogin(codeResponse.params.code, undefined);
 			} else {
 				console.error(codeResponse);
 			}
@@ -59,14 +69,14 @@ export function RevenutAuthentication({
 		[STRIPE_CLIENT_ID, appURL, request]
 	);
 
-	const handleLogin = (code: string): void => {
+	const handleLogin = (code?: string, account_id?: string): void => {
 		toggleLoading(true);
-		api.getDashboardData(mytimezone, code)
+		api.getDashboardData(mytimezone, code, account_id)
 			.then(response => {
 				if (response.ok) {
 					return response.json();
 				} else {
-					console.log(response);
+					console.error(response);
 					// TODO: display error message
 				}
 			})
@@ -74,8 +84,10 @@ export function RevenutAuthentication({
 				toggleData(data);
 				toggleUserID(data.AccountID);
 				toggleLoading(false);
-
-				storage.saveToStorage(storage.REVENUT_ACCOUNTID_STRIPE, data.AccountID);
+				
+				if (code) {
+					storage.saveToStorage(storage.REVENUT_ACCOUNTID_STRIPE, data.AccountID);
+				}
 			})
 			.catch(ex => {
 				console.error(ex);
@@ -86,7 +98,7 @@ export function RevenutAuthentication({
 		<HStack>
 			<Box w={"50%"}>
 			{
-			!rData.AccountID ?
+			!userId ?
 				<TouchableHighlight onPress={() => {
 					// https://docs.expo.dev/versions/latest/sdk/auth-session/#authsessionoptions
 					// https://github.com/expo/expo/issues/5975
@@ -100,7 +112,7 @@ export function RevenutAuthentication({
 				:
 				<HStack space={2} alignItems={'center'}>
 					<Avatar source={{ uri: rData.AccountIconURL }} style={{ width: 40, height: 40 }}></Avatar>
-					<Heading style={{ width: 150, height: 32 }} color={'white'}>{rData.AccountName}</Heading>
+					<Heading size={'md'} style={{ width: 150, height: 32 }} color={'white'}>{rData.AccountName}</Heading>
 				</HStack>
 			}
 			</Box>
