@@ -8,7 +8,7 @@ import { Image, TouchableHighlight } from 'react-native';
 import { Avatar, HStack, Heading, Box } from 'native-base';
 
 import * as Linking from 'expo-linking';
-import { useAuthRequest, AuthSessionResult } from 'expo-auth-session';
+import { useAuthRequest, AuthSessionResult, makeRedirectUri } from 'expo-auth-session';
 
 export function RevenutAuthentication({
     toggleUserID
@@ -29,7 +29,7 @@ export function RevenutAuthentication({
 
 	// in event useURL returns NULL, attempt to populate from another source since value is required in useAuthRequest
 	if (!appURL) {
-		appURL = window.location.href;
+		appURL = makeRedirectUri();	// TODO: implement deep link
 	}
 
 	// https://negativeepsilon.com/en/posts/expo-deep-linking/
@@ -116,7 +116,7 @@ export function RevenutAuthentication({
 				</HStack>
 			}
 			</Box>
-			<Box w={"50%"} alignItems={'end'}>
+			<Box w={"50%"} alignItems={'flex-end'}>
 				<TouchableHighlight onPress={() => toggleSettings(true)}>
 					<Heading color={'white'}>&#9881;</Heading>
 				</TouchableHighlight>
