@@ -7,8 +7,10 @@ import { Dispatch, SetStateAction, useCallback, useEffect } from 'react';
 import { Image, TouchableHighlight } from 'react-native';
 import { Avatar, HStack, Heading, Box } from 'native-base';
 
-import * as Linking from 'expo-linking';
 import { useAuthRequest, AuthSessionResult, makeRedirectUri } from 'expo-auth-session';
+
+const _deviceTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+const _appURL = makeRedirectUri();
 
 export function RevenutAuthentication({
     toggleUserID
@@ -24,15 +26,7 @@ export function RevenutAuthentication({
 		, userId: string | null
 		, rData: RevenutData
 }) {
-	const mytimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-	let appURL = Linking.useURL();
-
-	// in event useURL returns NULL, attempt to populate from another source since value is required in useAuthRequest
-	if (!appURL) {
-		appURL = makeRedirectUri();	// TODO: implement deep link
-	}
-
-	// https://negativeepsilon.com/en/posts/expo-deep-linking/
+	// get data on app load if authenticated before
 	useEffect(() => {
 		storage.getStorageValue(storage.REVENUT_ACCOUNTID_STRIPE)
 			.then(data => {
@@ -40,7 +34,7 @@ export function RevenutAuthentication({
 					handleLogin(undefined, data);
 				}
 			})
-	}, [appURL]);	
+	}, [_appURL]);	
 
 	const [request, response, promptAsync] = useAuthRequest(
 		// https://docs.expo.dev/versions/latest/sdk/auth-session/#useauthrequestconfig-discovery
@@ -48,7 +42,7 @@ export function RevenutAuthentication({
 			clientId: STRIPE_CLIENT_ID,
 			responseType: 'code',
 			scopes: ['read_write'],
-			redirectUri: appURL
+			redirectUri: _appURL
 			//, state: ''	TODO: pass state - https://stripe.com/docs/connect/oauth-reference
 		},
 		// https://docs.expo.dev/versions/latest/sdk/auth-session/#authrequestconfig
@@ -66,12 +60,12 @@ export function RevenutAuthentication({
 				console.error(codeResponse);
 			}
 		},
-		[STRIPE_CLIENT_ID, appURL, request]
+		[STRIPE_CLIENT_ID, _appURL, request]
 	);
 
 	const handleLogin = (code?: string, account_id?: string): void => {
 		toggleLoading(true);
-		api.getDashboardData(mytimezone, code, account_id)
+		api.getDashboardData(_deviceTimezone, code, account_id)
 			.then(response => {
 				if (response.ok) {
 					return response.json();
