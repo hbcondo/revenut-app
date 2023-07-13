@@ -25,7 +25,7 @@ export function RevenutDashboard() {
 				direction={{ base: "column", md: "row" }}
 				bg="#F8EFED"
 			>
-				<Box flex={{ base: 1, md: 3 }}>
+				<Box flex={{ base: 1, md: 3 }} safeArea>
 					<VStack p={2} bg="#E78E3A">
 						<RevenutAuthentication toggleUserID={setUserID} toggleData={setData} toggleLoading={setLoading} toggleSettings={setSettings} userId={rUserID} rData={rData} />
 						<RevenutToday rData={rData} rDates={rDates} />

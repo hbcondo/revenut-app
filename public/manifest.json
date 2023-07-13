@@ -5,7 +5,7 @@
   "display": "standalone",
   "start_url": "/",
   "short_name": "Revenut",
-  "theme_color": "#E78E3A",
+  "theme_color": "#F8EFED",
   "description": "SaaS Metrics in a Nutshell",
   "orientation": "any",
   "background_color": "#F8EFED",

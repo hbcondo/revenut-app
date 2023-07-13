@@ -8,7 +8,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
-    "primaryColor": "#E78E3A",
+    "primaryColor": "#F8EFED",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
