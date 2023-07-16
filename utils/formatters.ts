@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
 export function displayCurrency(n: number): string {
-    return new Intl.NumberFormat('en-US', {style:'currency', currency: 'USD'}).format(n);
+    return new Intl.NumberFormat('en-US', {style:'currency', currency: 'USD', maximumFractionDigits: 0, minimumFractionDigits: 0}).format(n);
 }
 
 export function displayCompactNumber(n: number): string {
