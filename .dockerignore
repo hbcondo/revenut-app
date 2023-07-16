@@ -1,0 +1,21 @@
+# added from .gitignore
+**\node_modules
+**\.expo
+**\dist			#Expo Metro
+**\npm-debug.*
+**\*.jks
+**\*.p8
+**\*.p12
+**\*.key
+**\*.mobileprovision
+**\*.orig.*
+#**\web-build	#Expo webpack
+
+# macOS
+**\.DS_Store
+
+# Temporary files created by Metro to check the health of the file watcher
+**\.metro-health-check*
+
+**\.env
+**\.toml
