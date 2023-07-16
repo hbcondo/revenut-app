@@ -17,7 +17,7 @@ export function RevenutDashboard() {
 	const [showSettings, setSettings] = useState(false);
 
 	return (
-		<Center flex={1} maxWidth={820}>
+		<Center flex={1}>
 			<Stack
 				m="1"
 				w="100%"

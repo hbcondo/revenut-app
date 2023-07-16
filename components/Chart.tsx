@@ -7,7 +7,9 @@ import { VictoryPie, VictoryLabel, VictoryContainer } from "victory-native"
 
 export function RevenutChart({rData: data}:{rData:RevenutData}) {
     let {height, width} = useWindowDimensions();
-    width = Math.min(width, 820);   // TODO: maxWidth specified in Dashboard
+
+    // attempt to allocate width so chart + labels render within viewport on desktop and mobile without getting cut off
+    width = Math.min(width, 1000);
 
     return (
         <VictoryContainer width={width} height={height/2.5}>
