@@ -22,13 +22,20 @@
 # Getting started
 This app is currently being developed as a [Progressive Web App (PWA) built on Expo](https://docs.expo.dev/guides/progressive-web-apps/). You can run it by performing these steps:
 
-1. Clone this repo locally
+1. Install [Expo CLI](https://docs.expo.dev/more/expo-cli) and [Serve CLI](https://www.npmjs.com/package/serve)
+2. Clone this repo locally
 
-2. Generate the PWA code by running this Expo command: ```npx expo export:web```
+3. Generate the PWA code by running this Expo command:
+   ```cli
+   npx expo export:web
+   ```
 
-3. [Expo's export process currently doesn't generate a valid manifest.json file](https://github.com/expo/expo-cli/issues/2441) but there is a valid one along with some assets in the `public` folder. Just copy the contents of that folder to the `web-build` folder created in the previous step
+5. [Expo's export process currently doesn't generate a valid manifest.json file](https://github.com/expo/expo-cli/issues/2441) but there is a valid one along with some assets in the `public` folder. Just copy the contents of that folder to the `web-build` folder created in the previous step
 
-4. [Publish the website](https://docs.expo.dev/distribution/publishing-websites/) locally (use webpack since it exports the service workers correctly): ```npx serve web-build --single```
+6. [Publish the website](https://docs.expo.dev/distribution/publishing-websites/) locally with Serve (use webpack since it exports the service workers correctly):
+   ```cli
+   npx serve web-build --single
+   ```
 
 
 # More info
