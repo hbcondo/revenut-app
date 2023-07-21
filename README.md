@@ -19,7 +19,7 @@
 ---
 > By Amar Kota - [Hire me](https://amarkota.com/resume)
 
-# Getting started
+# Installation
 This app is currently being developed as a [Progressive Web App (PWA) built on Expo](https://docs.expo.dev/guides/progressive-web-apps/). You can run it by performing these steps:
 
 1. Install [Expo CLI](https://docs.expo.dev/more/expo-cli) and [Serve CLI](https://www.npmjs.com/package/serve)
@@ -37,6 +37,8 @@ This app is currently being developed as a [Progressive Web App (PWA) built on E
    npx serve web-build --single
    ```
 
+# Stripe Integration
+Establish a [Stripe Connect](https://stripe.com/docs/connect) account to allow the mobile app to display the Stripe login web page. Use the API key of the Stripe Connect account to make calls to the [Stripe API](https://stripe.com/docs/api).
 
 # More info
 Details on Revenut are currently being maintained in this repo: https://github.com/hbcondo/revenut-web
