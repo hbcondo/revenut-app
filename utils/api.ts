@@ -28,7 +28,13 @@ export async function getHealthCheck(): Promise<Response> {
  * @returns `RevenutData`
  */
 export async function getDashboardData(timezone: string, auth_code?: string, account_id?: string): Promise<Response> {
-    let response = new Response();
+	const controller = new AbortController();
+	const signal = controller.signal;
+
+	// cancel the fetch request in 1 minute
+	setTimeout(() => controller.abort(), 60000);	
+	
+	let response = new Response();
 	let endpoint = `${REVENUT_API_BASE}v1/dashboard?tzIdentifier=${timezone}&`
 	
     if (account_id) {
@@ -38,8 +44,8 @@ export async function getDashboardData(timezone: string, auth_code?: string, acc
     }
 
     try {
-		response = await fetch(endpoint);
-	} catch (ex) {
+		response = await fetch(endpoint, { signal });
+	} catch (ex: unknown) {
 		console.error(ex);
 	}
 
