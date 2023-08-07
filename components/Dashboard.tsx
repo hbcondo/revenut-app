@@ -9,6 +9,16 @@ import { useState } from 'react';
 
 import { Box, Center, Stack, VStack } from 'native-base';
 
+import { LogBox, LogBoxNotification } from 'react-native-web-log-box';
+
+/* 
+	Install LogBox for all environments 
+	Ignore known issues without a resolution
+	Display remaining warnings / errors to help report issues
+*/
+LogBox.ignoreLogs(['SSRProvider', 'deprecated', 'animated']);
+LogBox.install();
+
 export function RevenutDashboard() {
 	const [rUserID, setUserID] = useState(null);
 	const [rData, setData] = useState(new RevenutData());
@@ -37,6 +47,7 @@ export function RevenutDashboard() {
 			</Stack>
 			<RevenutLoading isLoading={showLoading} />
 			<RevenutSettings toggleUserID={setUserID} toggleData={setData} toggleSettings={setSettings} showSettings={showSettings} userId={rUserID} />
+			<LogBoxNotification />
 		</Center>
 	)
 }

@@ -31,6 +31,7 @@
     "react-native-safe-area-context": "4.5.0",
     "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.10",
+    "react-native-web-log-box": "^0.0.7",
     "victory": "^36.6.11",
     "victory-native": "^36.6.11",
     "workbox-background-sync": "^7.0.0",
