@@ -14,6 +14,7 @@
   <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
 
   <h3 align="center">SaaS Metrics in a Nutshell</h3>
+  <a href="https://github.com/hbcondo/revenut-app/wiki">Wiki</a> | <a href="https://app.revenut.com">Demo</a>
 </div>
 
 ---
@@ -98,14 +99,6 @@ If Authentication is successful, Revenut will save the `stripe_user_id` to the d
 
 > [!NOTE]
 > To remove `stripe_user_id` from the device, you can clear the app's data through your device's settings or click the **Logout** button within the app. This will call [Stripe's revoke endpoint](https://stripe.com/docs/connect/oauth-reference#post-deauthorize) so the Stripe account is no longer accessible by Revenut.
-
-
-#  📐 Metrics
-Revenut calculates an end-of-month (EOM) forecast with these steps executed via multiprocess-based parallelism [using a pool of workers](https://docs.python.org/3/library/multiprocessing.html#using-a-pool-of-workers):
-1. Retrieve a list of charges for the requested account and sum the amounts for all records that have not been disputed or refunded as both of these result in withdrawals
-2. Retrieve a list of subscriptions for the requested account and:
-    - Attempt to get new subscriptions that are still in the trial phase for the current month by adding the amounts for all subscriptions that have a status of `trialing` and their `current_period_end` is less than or equal to the current end of month date
-    - Attempt to get active subscriptions that haven't been invoiced yet by current month end by adding the amounts for all subscriptions that have a status of `active` (payment should have been successful before) and their `current_period_end` is also less than or equal to the current end of month date
 
 
 #  🙋 Challenges
