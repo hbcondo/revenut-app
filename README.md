@@ -70,19 +70,31 @@ sequenceDiagram
     activate Stripe API
     Revenut API->>Stripe API: Request access token
     Stripe API-->>Revenut API: [stripe_user_id]
-    Revenut API->>Stripe API: Get Stripe account data
-    Stripe API-->>Revenut API: Return account data
+    par multiprocess
+      Revenut API-)Stripe API: /charges
+      Revenut API-)Stripe API: /subscriptions
+      Revenut API-)Stripe API: /customers
+      Revenut API-)Stripe API: /account
+    end
+    Stripe API-->>Revenut API: Stripe API responses
     deactivate Stripe API
     Note over Revenut API: Crunch Numbers 
-    Revenut API-->>Revenut App: Return SaaS metrics
+    Revenut API-->>Revenut App: Return SaaS metrics + [stripe_user_id]
     deactivate Revenut API
     Revenut App-->>SaaS Owner: Display SaaS metrics
 ```
 
 
 #  🚦 Authentication
-Revenut uses Expo's built-in [Authentication package](https://docs.expo.dev/develop/authentication/) that has been configured to use [Stripe's browser-based authentication via OAuth](https://stripe.com/docs/connect/oauth-reference) which allows Stripe users to login with their existing Stripe credentials securely so Revenut can retrieve data required to formulate its metrics on a SaaS.
+Revenut uses Expo's built-in [Authentication package](https://docs.expo.dev/develop/authentication/) that has been configured to use [Stripe's browser-based authentication via OAuth](https://stripe.com/docs/connect/oauth-reference). This allows Stripe users to login with their existing Stripe credentials securely so Revenut can retrieve data required to formulate its metrics.
 <p align="center"><img src="docs/assets/Revenut-Screenshot-Stripe-Login.png" width="25%" alt="Revenut Authentication" /></p>
+
+
+#  💾 Storage
+If Authentication is successful, Revenut will save the `stripe_user_id` to the device's local storage via an [asynchronous, unencrypted, persistent, key-value storage API](https://docs.expo.dev/versions/latest/sdk/async-storage/) compatible with Android, iOS and Web platforms. With this, the app will not require logging in again.
+
+> [!NOTE]
+> To remove `stripe_user_id` from the device, you can clear the app's data through your device's settings or click the **Logout** button within the app. This will call [Stripe's revoke endpoint](https://stripe.com/docs/connect/oauth-reference#post-deauthorize) so the Stripe account is no longer accessible by Revenut.
 
 
 #  📐 Metrics
@@ -103,7 +115,7 @@ Source: [https://github.com/stripe/stripe-dotnet/issues/2284#issuecomment-777192
 
 
 #  👪 Contributing
-If you like Revenut, please star this repo. If you want to make Revenut better, feel free to submit a PR, log an issue or [contact me](https://amarkota.com/contact) directly.
+If you like Revenut, **please star this repo**. If you want to make Revenut better, feel free to submit a PR, log an issue or [contact me](https://amarkota.com/contact) directly.
 
 
 #  🔖 License
