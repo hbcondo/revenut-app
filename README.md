@@ -59,6 +59,7 @@ sequenceDiagram
     autonumber
     actor SaaS Owner
     SaaS Owner->>Revenut App: iOS / Android / Web
+    activate Revenut App
     critical whitelist
     activate Stripe Connect
     Revenut App->>Stripe Connect: Login with Stripe
@@ -70,7 +71,7 @@ sequenceDiagram
     activate Stripe API
     Revenut API->>Stripe API: Request access token
     Stripe API-->>Revenut API: [stripe_user_id]
-    par multiprocess
+    par multiprocess async
       Revenut API-)Stripe API: /charges
       Revenut API-)Stripe API: /subscriptions
       Revenut API-)Stripe API: /customers
@@ -78,10 +79,12 @@ sequenceDiagram
     end
     Stripe API-->>Revenut API: Stripe API responses
     deactivate Stripe API
-    Note over Revenut API: Crunch Numbers 
+    Note over Revenut API: Calculate Metrics 
     Revenut API-->>Revenut App: Return SaaS metrics + [stripe_user_id]
     deactivate Revenut API
-    Revenut App-->>SaaS Owner: Display SaaS metrics
+    Note over Revenut App: Save [stripe_user_id] to local storage
+    Revenut App--xSaaS Owner: Display SaaS metrics
+    deactivate Revenut App
 ```
 
 
