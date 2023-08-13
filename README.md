@@ -61,17 +61,21 @@ sequenceDiagram
     actor SaaS Owner
     SaaS Owner->>Revenut App: iOS / Android / Web
     activate Revenut App
-    critical whitelist
-    activate Stripe Connect
-    Revenut App->>Stripe Connect: Login with Stripe
-    Stripe Connect-->>Revenut App: [authorization_code]
-    deactivate Stripe Connect
+    rect rgb(248, 239, 237)
+      Note over Revenut App,Stripe Connect: One-Time Authorization
+      critical whitelist
+      activate Stripe Connect
+      Revenut App->>Stripe Connect: Login with Stripe
+      Stripe Connect-->>Revenut App: [authorization_code]
+      deactivate Stripe Connect
     end
     activate Revenut API
     Revenut App->>Revenut API: [authorization_code]
     activate Stripe API
+    Note over Revenut API, Stripe API: One-Time Authentication
     Revenut API->>Stripe API: Request access token
     Stripe API-->>Revenut API: [stripe_user_id]
+    end
     par multiprocess async
       Revenut API-)Stripe API: /charges
       Revenut API-)Stripe API: /subscriptions
