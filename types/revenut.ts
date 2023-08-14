@@ -14,6 +14,7 @@ export class RevenutData {
     public VolumeGrossMonthPrevious:number = 0;
     public VolumeGrossMonthToDatePrevious:number = 0;
     public VolumeGrossMonthForecast:number = 0;
+    public VolumeGrossMonthOverMonthPercentChangeType: number = 0;
     public VolumeGrossMonthOverMonthPercentChange:number = 0;
     public VolumeGrossMonthToMonthPercentChange:number = 0;
     public VolumePending:number = 0;
