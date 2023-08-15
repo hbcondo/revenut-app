@@ -1,7 +1,8 @@
 import { RevenutData, RevenutDates } from '../types/revenut';
 import { displayCurrency } from '../utils/formatters';
+import { styles } from '../utils/styles';
 
-import {useWindowDimensions} from 'react-native';
+import { useWindowDimensions } from 'react-native';
 
 import { VictoryPie, VictoryLabel, VictoryContainer } from "victory-native"
 
@@ -23,11 +24,11 @@ export function RevenutChart({rData: data}:{rData:RevenutData}) {
                 ]}
                 innerRadius={Math.min(120, width/3.7)}
                 padAngle={1} 
-                colorScale={["#6ee7b7", "#059669", "#d1fae5"]}
+                colorScale={[styles.revenut.trials, styles.revenut.paid, styles.revenut.open]}
             />
             <VictoryLabel
                 textAnchor="middle"
-                style={{ fontSize: 18, fill: "#059669", fontWeight: "bold" }}
+                style={{ fontSize: 18, fill: styles.revenut.paid, fontWeight: "bold" }}
                 x={width/2} y={height/5}
                 text={`${(!data.IsAuthorized) ? 0 : data.VolumeGrossMonthCurrentPercent.toFixed(0)}%${'\n'} Gross Volume${'\n'}MTD`}
             />

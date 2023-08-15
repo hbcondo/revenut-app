@@ -4,6 +4,7 @@ import { RevenutSettings } from './Settings';
 import { RevenutForecast } from './Forecast';
 import { RevenutToday } from './Today';
 import { RevenutLoading } from './Loading';
+import { styles } from '../utils/styles';
 
 import { useState } from 'react';
 
@@ -33,10 +34,10 @@ export function RevenutDashboard() {
 				w="100%"
 				h="100%"
 				direction={{ base: "column", md: "row" }}
-				bg="#F8EFED"
+				bg={styles.revenut.secondary}
 			>
 				<Box flex={{ base: 1, md: 3 }} safeArea>
-					<VStack p={2} bg="#E78E3A">
+					<VStack p={2} bg={styles.revenut.primary}>
 						<RevenutAuthentication toggleUserID={setUserID} toggleData={setData} toggleLoading={setLoading} toggleSettings={setSettings} userId={rUserID} rData={rData} />
 						<RevenutToday rData={rData} rDates={rDates} />
 					</VStack>

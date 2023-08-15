@@ -1,22 +1,11 @@
 import { RevenutData, RevenutDates } from '../types/revenut';
 import { RevenutChart } from './Chart';
 import { displayCompactNumber, displayMonthDate, displayChangeNumber } from '../utils/formatters';
+import { styles, getChangeColorScheme } from '../utils/styles';
 
-import { Badge, Box, HStack, Heading, Text, theme } from 'native-base';
-import { ColorSchemeType } from 'native-base/lib/typescript/components/types';
+import { Badge, Box, HStack, Heading, Text } from 'native-base';
 
 export function RevenutForecast({ data, dates }: {data: RevenutData, dates: RevenutDates}) {
-	function getChangeColorScheme(changeType: number): ColorSchemeType {
-		let colorScheme: ColorSchemeType = theme.colors.gray[300];
-		
-		switch (changeType) {
-			case 1: colorScheme = theme.colors.green[500]; break;
-			case -1: colorScheme = theme.colors.red[600]; break;
-		}
-
-		return colorScheme;
-	}
-
 	return (
 		<Box justifyContent={'center'} p="2" width="98%" backgroundColor={'white'} borderWidth={1} borderColor={'coolGray.200'} shadow={1}>
 			<HStack>
@@ -29,11 +18,11 @@ export function RevenutForecast({ data, dates }: {data: RevenutData, dates: Reve
 			</HStack>
 			<HStack>
 				<Box width={'50%'}>
-					<Heading color={'tertiary.600'}>${displayCompactNumber(data.VolumeGrossMonthForecast)}</Heading>
+					<Heading color={styles.revenut.paid}>${displayCompactNumber(data.VolumeGrossMonthForecast)}</Heading>
 					<Text>{displayMonthDate(dates.DateMonthStartCurrent)} &#10140; {displayMonthDate(dates.DateMonthEndCurrent)}</Text>
 				</Box>
 				<Box width={'50%'} alignItems={'flex-end'}>
-					<Heading color={'primary.900'}>${displayCompactNumber(data.VolumeGrossMonthPrevious)}</Heading>
+					<Heading color={styles.revenut.previous}>${displayCompactNumber(data.VolumeGrossMonthPrevious)}</Heading>
 					<Text>{displayMonthDate(dates.DateMonthStartPrevious)} &#10140; {displayMonthDate(dates.DateMonthEndPrevious)}</Text>
 				</Box>
 			</HStack>
