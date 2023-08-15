@@ -98,13 +98,6 @@ Revenut uses Expo's built-in [Authentication package](https://docs.expo.dev/deve
 <p align="center"><img src="docs/assets/Revenut-Screenshot-Stripe-Login.png" width="25%" alt="Revenut Authentication" /></p>
 
 
-#  💾 Storage
-If Authentication is successful, Revenut will save the `stripe_user_id` to the device's local storage via an [asynchronous, unencrypted, persistent, key-value storage API](https://docs.expo.dev/versions/latest/sdk/async-storage/) compatible with Android, iOS and Web platforms. With this, the app will not require logging in again.
-
-> [!NOTE]
-> To remove `stripe_user_id` from the device, you can clear the app's data through your device's settings or click the **Logout** button within the app. This will call [Stripe's revoke endpoint](https://stripe.com/docs/connect/oauth-reference#post-deauthorize) so the Stripe account is no longer accessible by Revenut.
-
-
 #  🙋 Challenges
 The metrics Revenut displays requires retrieving two months of charges (for month-to-date and month-over-month comparisons) using Stripe's API, which can result in long loading times because: 
 
