@@ -31,13 +31,13 @@ I looked into using another SaaS analytics service but they all charge a premium
 | [<img alt="Screenshot Stripe Mobile App" src="docs/assets/Revenut-Screenshot-Stripe-Mobile.png" width="50%" alt="Stripe Mobile App" />](docs/assets/Revenut-Screenshot-Stripe-Mobile.png) | [<img src="docs/assets/Revenut-Screenshot-Dashboard.png" width="50%" alt="Revenut Mobile App" />](docs/assets/Revenut-Screenshot-Dashboard.png)     |
 
 
-#  ❔ Use Case
-SaaS owners who offer free trials on their products and have recurring revenue in monthly, annual or other scheduled installments. 
+#  👤 Use Case
+SaaS owners who offer trials on their products and have recurring revenue in monthly, annual or other scheduled installments. 
 
 
 #  ✨ Features
 - Exclude disputed and refunded transactions for accurate revenue reporting
-- Login with existing Stripe username/password
+- Login with existing Stripe username / password + MFA
 - Calculates unrealized ("paper") revenue based on the number of customers trialing your product
 - Calculates unrealized revenue for existing customers that are scheduled to pay their upcoming invoice
 - Calculates realized revenue for customers who paid their invoice
@@ -98,13 +98,15 @@ Revenut uses Expo's built-in [Authentication package](https://docs.expo.dev/deve
 <p align="center"><img src="docs/assets/Revenut-Screenshot-Stripe-Login.png" width="25%" alt="Revenut Authentication" /></p>
 
 
-#  🙋 Challenges
-The metrics Revenut displays requires retrieving two months of charges (for month-to-date and month-over-month comparisons) using Stripe's API, which can result in long loading times because: 
-
-> ...listing charges (or most resources) can be quite slow as you need to render many objects. The Charge API especially is quite a large object to render and paginate through.
-
-Source: [https://github.com/stripe/stripe-dotnet/issues/2284#issuecomment-777192698](https://github.com/stripe/stripe-dotnet/issues/2284#issuecomment-777192698)
-<p align="center"><img src="docs/assets/Revenut-Screenshot-Loading.png" width="25%" alt="Revenut Loading" /></p>
+#  🧭 Roadmap
+SaaS owners can generate revenue from multiple sources including app stores, advertisements and more. Revenut should be updated to forecast revenue from these providers:
+- [x] Integrate with Stripe
+- [ ] Integrate with PayPal
+- [ ] Integrate with Google AdSense
+- [ ] Integrate with Apple App Store
+- [ ] Integrate with Google Play Store
+- [ ] Implement Cache
+- [ ] Submit PWA to App Stores
 
 
 #  👪 Contributing
