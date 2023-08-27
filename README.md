@@ -14,13 +14,13 @@
   <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
 
   <h3 align="center">SaaS Metrics in a Nutshell</h3>
-  <a href="https://github.com/hbcondo/revenut-app/wiki">Wiki</a> | <a href="https://app.revenut.com">Demo</a>
+  <a href="https://github.com/hbcondo/revenut-app">Source Code</a> | <a href="https://github.com/hbcondo/revenut-app/wiki">Wiki</a> | <a href="https://app.revenut.com">Demo</a>
 </div>
 
 ---
 > By Amar Kota - [Hire me](https://amarkota.com/resume)
 
-Revenut is being created as an open source alternative to [Stripe's mobile app](https://support.stripe.com/questions/stripe-iphone-and-android-mobile-apps-mobile-dashboard-app-for-standard-direct-users) after my SaaS[^1] experienced fraudulent activity in the form of [card testing](https://stripe.com/docs/disputes/prevention/card-testing). Many other Stripe customers have voiced their problems with card testing too[^2][^3] and although Stripe confirmed card testing has ceased on my website, the problem persists where fraudulent transactions and customers are still included in Stripe's mobile app reporting. As a result, the numbers and charts displayed simply do not reflect actuals. 
+Revenut is being developed as a lightweight, open source alternative to [Stripe's mobile app](https://support.stripe.com/questions/stripe-iphone-and-android-mobile-apps-mobile-dashboard-app-for-standard-direct-users) after my SaaS[^1] experienced fraudulent activity in the form of [card testing](https://stripe.com/docs/disputes/prevention/card-testing). Many other Stripe customers have voiced their problems with card testing too[^2][^3] and although Stripe confirmed card testing has ceased on my website, the problem persists where fraudulent transactions and customers are still included in Stripe's mobile app reporting. As a result, the numbers and charts displayed simply do not reflect actuals. 
 
 Unfortunately Stripe is unable to [modify the revenue data or financial reports on the dashboard at this point](docs/assets/Revenut-Screenshot-Stripe-Email.png) so the Stripe mobile app, as convenient and fast as it is, does not accurately display metrics including `Gross Volume` and `New Customers`. 
 
@@ -31,20 +31,19 @@ I looked into using another SaaS analytics service but they all charge a premium
 | [<img alt="Screenshot Stripe Mobile App" src="docs/assets/Revenut-Screenshot-Stripe-Mobile.png" width="50%" alt="Stripe Mobile App" />](docs/assets/Revenut-Screenshot-Stripe-Mobile.png) | [<img src="docs/assets/Revenut-Screenshot-Dashboard.png" width="50%" alt="Revenut Mobile App" />](docs/assets/Revenut-Screenshot-Dashboard.png)     |
 
 
-#  👤 Use Case
+# 👤 Use Case
 SaaS owners who offer trials on their products and have recurring revenue in monthly, annual or other scheduled installments. 
 
 
-#  ✨ Features
+# ✨ Features
 - Exclude disputed and refunded transactions for accurate revenue reporting
 - Login with existing Stripe username / password + MFA
 - Calculates unrealized ("paper") revenue based on the number of customers trialing your product
 - Calculates unrealized revenue for existing customers that are scheduled to pay their upcoming invoice
 - Calculates realized revenue for customers who paid their invoice
-- Logging out revokes access from Revenut
 
 
-#  💻 Built With
+# 💻 Built With
 - [`FastAPI`](https://fastapi.tiangolo.com/) `Python`
 - [`Expo`](https://expo.dev) `React Native + Typescript`
 - [`Victory`](https://formidable.com/open-source/victory/)
@@ -54,7 +53,7 @@ SaaS owners who offer trials on their products and have recurring revenue in mon
 - [`MockuPhone`](https://mockuphone.com/)
 
 
-#  🏃 Workflow
+# 🏃 Workflow
 ```mermaid
 sequenceDiagram
     autonumber
@@ -62,7 +61,7 @@ sequenceDiagram
     SaaS Owner->>Revenut App: iOS / Android / Web
     activate Revenut App
     rect rgb(248, 239, 237)
-      Note over Revenut App,Stripe Connect: One-Time Authorization
+      Note over Revenut App,Stripe Connect: One-Time Authentication
       critical whitelist
         activate Stripe Connect
         Revenut App->>Stripe Connect: Login with Stripe
@@ -72,7 +71,7 @@ sequenceDiagram
       activate Revenut API
       Revenut App->>Revenut API: [authorization_code]
       activate Stripe API
-      Note over Revenut API, Stripe Connect: One-Time Authentication
+      Note over Revenut API, Stripe Connect: One-Time Authorization
       Revenut API->>Stripe Connect: Request access token
       Stripe Connect-->>Revenut API: [stripe_user_id]
     end
@@ -93,31 +92,29 @@ sequenceDiagram
 ```
 
 
-#  🚦 Authentication
+# 🚦 Authentication
 Revenut uses Expo's built-in [Authentication package](https://docs.expo.dev/develop/authentication/) that has been configured to use [Stripe's browser-based authentication via OAuth](https://stripe.com/docs/connect/oauth-reference). This allows Stripe users to login with their existing Stripe credentials securely so Revenut can retrieve data required to formulate its metrics.
 <p align="center"><img src="docs/assets/Revenut-Screenshot-Stripe-Login.png" width="25%" alt="Revenut Authentication" /></p>
 
 
-#  🧭 Roadmap
+# 🧭 Roadmap
 SaaS owners can generate revenue from multiple sources including app stores, advertisements and more. Revenut should be updated to forecast revenue from these providers:
-- [x] Integrate with Stripe
-- [ ] Integrate with PayPal
-- [ ] Integrate with Google AdSense
-- [ ] Integrate with Apple App Store
-- [ ] Integrate with Google Play Store
-- [ ] Implement Cache
-- [ ] Submit PWA to App Stores
+- [x] Stripe
+- [ ] PayPal
+- [ ] Google AdSense
+- [ ] Apple App Store
+- [ ] Google Play Store
 
 
-#  👪 Contributing
+# 👪 Contributing
 If you like Revenut, **please star this repo**. If you want to make Revenut better, feel free to submit a PR, log an issue or [contact me](https://amarkota.com/contact) directly.
 
 
-#  🔖 License
+# 🔖 License
 The Revenut source code is made available under the [**Apache 2.0 license**](LICENSE).
 
 
-#  🙌 Acknowledgements
+# 🙌 Acknowledgements
 - [https://stripe.com/docs/api](https://stripe.com/docs/api)
 
 
