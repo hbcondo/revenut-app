@@ -14,7 +14,7 @@
   <img alt="Supports Expo Web" longdesc="Supports Expo Web" src="https://img.shields.io/badge/web-4630EB.svg?style=flat-square&logo=GOOGLE-CHROME&labelColor=4285F4&logoColor=fff" />
 
   <h3 align="center">SaaS Metrics in a Nutshell</h3>
-  <a href="https://github.com/hbcondo/revenut-app">Source Code</a> | <a href="https://github.com/hbcondo/revenut-app/wiki">Wiki</a> | <a href="https://app.revenut.com">Demo</a>
+  <a href="https://github.com/hbcondo/revenut-app/wiki">Wiki</a> | <a href="https://app.revenut.com">Demo</a> | <a href="https://github.com/hbcondo/revenut-api">API</a>
 </div>
 
 ---
@@ -107,7 +107,7 @@ SaaS owners can generate revenue from multiple sources including app stores, adv
 
 
 # 👪 Contributing
-If you like Revenut, **please star this repo**. If you want to make Revenut better, feel free to submit a PR, log an issue or [contact me](https://amarkota.com/contact) directly.
+If you like Revenut, please star this repo or consider sponsoring. If you want to make Revenut better, feel free to submit a PR, log an issue or [contact me](https://amarkota.com/contact) directly.
 
 
 # 🔖 License
