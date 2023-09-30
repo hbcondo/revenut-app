@@ -63,7 +63,7 @@ export function RevenutSettings({
                             </Text>
                             <Flex>
                                 <Text mt="2" fontSize={12} fontWeight="medium" color="darkBlue.600">
-                                    <Link href="https://github.com/hbcondo/revenut-web" isExternal={true} isUnderlined={false}>View on Github</Link>
+                                    <Link href="https://github.com/hbcondo/revenut-app" isExternal={true} isUnderlined={false}>View on Github</Link>
                                 </Text>
                             </Flex>
                         </Box>
