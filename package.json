@@ -34,7 +34,7 @@
     "react-native-web": "~0.18.10",
     "react-native-web-log-box": "^0.0.7",
     "victory": "^36.6.11",
-    "victory-native": "^36.6.11",
+    "victory-native": "^41.26.0",
     "workbox-background-sync": "^7.0.0",
     "workbox-broadcast-update": "^7.0.0",
     "workbox-cacheable-response": "^7.0.0",
