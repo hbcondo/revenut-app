@@ -5,21 +5,34 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>{{ page.title | default: site.title }}</title>
 
-  <!-- Load Mermaid from CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <!-- GitHub-like markdown styles to make README content look correct on Pages -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css">
+  <style>
+    /* Constrain content and add comfortable padding */
+    body { background: #f6f8fa; color: #24292e; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+    main.markdown-body { box-sizing: border-box; max-width: 980px; margin: 2rem auto; padding: 2rem; background: #fff; border-radius: 6px; box-shadow: 0 1px 3px rgba(27,31,35,0.04); }
+    /* Make sure images scale nicely */
+    .markdown-body img { max-width: 100%; }
+    .markdown-body h1, .markdown-body h2 { margin-top: 0.5rem; }
+  </style>
 
-  <!-- Initialize Mermaid after DOM loads -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      if (window.mermaid) {
-        mermaid.initialize({ startOnLoad: true, theme: 'default' });
-      }
+  <!-- Mermaid: add mermaid class to Jekyll's language-mermaid blocks, then import the ESM build -->
+  <script type="module">
+    // Add 'mermaid' class to any element Jekyll marked as language-mermaid
+    Array.from(document.getElementsByClassName("language-mermaid")).forEach(element =&gt; {
+      element.classList.add("mermaid");
     });
+
+    // Import the ESM build from the CDN and initialize
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: true });
   </script>
 
   {{ content_for_head }}
 </head>
 <body>
-  {{ content }}
+  <main class="markdown-body">
+    {{ content }}
+  </main>
 </body>
 </html>
