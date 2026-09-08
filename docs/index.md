@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Revenut
+title: Revenut (docs placeholder)
 ---
 
-{% include_relative ../README.md %}
+This file is a placeholder to avoid a Jekyll include syntax error. The site index is served from the repository root (index.md).
